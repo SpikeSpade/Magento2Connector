@@ -56,7 +56,6 @@ class SynchronizeProduct implements ObserverInterface
                 // Retrieve the product being updated from the event observer
                 $i = 0;
                 $product_data = array();
-                $related_products = array();
 
                 $product = $observer->getEvent()->getProduct();
 

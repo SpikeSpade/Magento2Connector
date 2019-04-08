@@ -2,8 +2,14 @@
 
 namespace MailCampaigns\Connector\Observer;
 
+use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Catalog\Helper\Data;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Event\Observer as EventObserver;
+use Magento\Framework\ObjectManagerInterface;
+use Magento\Store\Model\StoreManagerInterface;
+use MailCampaigns\Connector\Helper\Data as DataHelper;
+use MailCampaigns\Connector\Helper\MailCampaigns_API;
 use Psr\Log\LoggerInterface as Logger;
 
 class SynchronizeProduct implements ObserverInterface
@@ -17,12 +23,12 @@ class SynchronizeProduct implements ObserverInterface
     protected $mcapi;
 
     public function __construct(
-        \MailCampaigns\Connector\Helper\Data $dataHelper,
-        \MailCampaigns\Connector\Helper\MailCampaigns_API $mcapi,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Framework\ObjectManagerInterface $objectManager,
-        \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
-        \Magento\Catalog\Helper\Data $taxHelper,
+        DataHelper $dataHelper,
+        MailCampaigns_API $mcapi,
+        StoreManagerInterface $storeManager,
+        ObjectManagerInterface $objectManager,
+        ProductRepositoryInterface $productRepository,
+        Data $taxHelper,
         Logger $logger
     ) {
         $this->logger               = $logger;

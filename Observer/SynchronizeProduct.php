@@ -77,14 +77,17 @@ class SynchronizeProduct implements ObserverInterface
                 $product_data[$i]["lowest_tier_price"] = $lowestTierPrice;
 
                 // images
-                $image_id = 1;
-                $product_data[$i]["mc:image_url_main"] = $product->getMediaConfig()->getMediaUrl($product->getData('image'));
-                $product_images = $product->getMediaGalleryImages();
-                if (!empty($product_images) && sizeof($product_images) > 0 && is_array($product_images))
+                if(!empty($product->getData('image')))
                 {
-                    foreach ($product_images as $image)
+                    $image_id                              = 1;
+                    $product_data[$i]["mc:image_url_main"] = $product->getMediaConfig()->getMediaUrl($product->getData('image'));
+                    $product_images                        = $product->getMediaGalleryImages();
+                    if(!empty($product_images) && sizeof($product_images) > 0 && is_array($product_images))
                     {
-                        $product_data[$i]["mc:image_url_".$image_id++.""] = $image->getUrl();
+                        foreach($product_images as $image)
+                        {
+                            $product_data[$i]["mc:image_url_" . $image_id++ . ""] = $image->getUrl();
+                        }
                     }
                 }
 
